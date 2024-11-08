@@ -42,7 +42,9 @@
     # Speed up net.sh deploys by excluding unused binaries
   ] ++ (lib.optionals (!validatorOnly) [
     "cargo-build-bpf"
+    "cargo-build-sbf"
     "cargo-test-bpf"
+    "cargo-test-sbf"
     "solana-dos"
     "solana-install-init"
     "solana-stake-accounts"
@@ -102,6 +104,8 @@ rustPlatform.buildRustPackage rec {
   postInstall = ''
     mkdir -p $out/bin/sdk/bpf
     cp -a ./sdk/bpf/* $out/bin/sdk/bpf/
+    mkdir -p $out/bin/sdk/sbf
+    cp -a ./sdk/sbf/* $out/bin/sdk/sbf/
   '';
 
   # this is too slow
